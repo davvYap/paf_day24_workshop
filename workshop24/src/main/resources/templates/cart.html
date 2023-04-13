@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h1>Shopping Cart</h1>
+
+    <form method="POST" action="/order" data-th-object="${product}">
+      <table>
+        <tr>
+          <td>Product:</td>
+          <td>
+            <select data-th-field="*{name}" required>
+              <option value="" disabled selected>Select an item</option>
+              <option
+                data-th-each="p : ${products}"
+                data-th-value="${p.getName()}"
+                data-th-text="${p.getName()}"></option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Quantity:</td>
+          <td><input type="number" data-th-field="*{quantity}" min="1" value="1" /></td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td><button type="submit">Add</button></td>
+        </tr>
+      </table>
+    </form>
+
+    <h2>Contents</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-th-each="item: ${items}">
+          <td><span data-th-text="${item.name}"></span></td>
+          <td><span data-th-text="${item.quantity}"></span></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2">
+            <form method="POST" action="/checkout">
+              <tr>
+                <td>Customer name:</td>
+                <td><input type="text" name="name" required /></td>
+              </tr>
+
+              <tr>
+                <td>Shipping Address:</td>
+                <td><input type="text" id="ship_address" name="ship_address" required /></td>
+              </tr>
+
+              <tr>
+                <td>Notes:</td>
+                <td><textarea id="notes" name="notes"></textarea></td>
+              </tr>
+              <tr>
+                <td colspan="2" style="padding-top: 10px">
+                  <button type="submit">Checkout</button>
+                </td>
+              </tr>
+            </form>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </body>
+</html>

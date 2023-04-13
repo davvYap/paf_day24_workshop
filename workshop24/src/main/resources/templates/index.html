@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Shopping Page</title>
+  </head>
+  <body>
+    <h1>Shopping Cart</h1>
+
+    <form method="POST" action="/order" data-th-object="${product}">
+      <table>
+        <tr>
+          <td>Product:</td>
+          <td>
+            <select data-th-field="*{name}" required>
+              <option value="" disabled selected>Select an item</option>
+              <option
+                data-th-each="p : ${products}"
+                data-th-value="${p.getName()}"
+                data-th-text="${p.getName()}"></option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Quantity:</td>
+          <td><input type="number" data-th-field="*{quantity}" min="1" value="1" /></td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td><button type="submit">Add</button></td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>
