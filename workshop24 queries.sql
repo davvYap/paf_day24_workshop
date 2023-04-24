@@ -26,10 +26,16 @@ CREATE TABLE purchase_order_details (
     FOREIGN KEY (order_id) REFERENCES purchase_order(order_id)
 );
 
-
-
 CREATE TABLE fruits_products (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    standard_price DECIMAL(10, 2) NOT NULL,
+    discount DECIMAL(3, 2) DEFAULT 1.0
+);
+
+create database if not exists dummy;
+CREATE TABLE if not exists fruits_products  (
+id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     standard_price DECIMAL(10, 2) NOT NULL,
     discount DECIMAL(3, 2) DEFAULT 1.0
